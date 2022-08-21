@@ -2,15 +2,33 @@ import { useState } from "react"
 import Cell from "./Components/Cell"
 
 function App() {
-  const [board, setBoard] = useState(["x", "o", "x", "o", "x", "v", "o", "x", "o"])
+  const defaultBoard = new Array(9).fill(null)
+  const [board, setBoard] = useState(defaultBoard)
+  const [turn, setTurn] = useState("X")
 
-  const boardMapped = board.map((element, i) => {
-    return <Cell key={i} id={i} sign={element} />
+  function handleClick(id) {
+    if (board[id]) return
+    setBoard((prevBoard) => {
+      const newBoard = [...prevBoard]
+      newBoard[id] = turn
+      return newBoard
+    })
+
+    setTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"))
+  }
+
+  const boardMapped = board.map((sign, i) => {
+    return <Cell key={i} id={i} sign={sign} setBoard={setBoard} handleClick={handleClick} />
   })
 
   return (
     <main className="app">
+      <span>{turn}'s turn.</span>
       <div className="game-grid">{boardMapped}</div>
+      <p className="fun-fact">
+        Fun fact: All games end in a draw unless one of the players plays wrong. Actually, this fact
+        isn't fun. 😁
+      </p>
     </main>
   )
 }
