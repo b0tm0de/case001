@@ -13,6 +13,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  --color-pencil-gray: #5c6274;
 }
 
 .app {
@@ -41,13 +42,12 @@
   --cell-size: min(20vw, 20vh);
   display: grid;
   place-items: center;
-  color: #5c6274;
-  border: solid 2px #5c6274;
+  color: var(--color-pencil-gray);
+  border: solid 2px var(--color-pencil-gray);
   width: var(--cell-size);
   height: var(--cell-size);
   font-size: var(--cell-size);
   font-family: "Square Peg", cursive;
-
   text-transform: uppercase;
 }
 
@@ -74,4 +74,9 @@
 .fun-fact {
   font-size: 1rem;
   font-family: "Comic Sans MS", cursive;
+  min-height: 5rem;
+  text-align: center;
+}
+.fun-fact > summary {
+  cursor: pointer;
 }

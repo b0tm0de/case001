@@ -25,10 +25,12 @@ function App() {
     <main className="app">
       <span>{turn}'s turn.</span>
       <div className="game-grid">{boardMapped}</div>
-      <p className="fun-fact">
-        Fun fact: All games end in a draw unless one of the players plays wrong. Actually, this fact
-        isn't fun. 😁
-      </p>
+
+      <details className="fun-fact">
+        <summary>Fun fact:</summary>
+        All games end in a draw unless one of the players plays wrong. Actually, this fact isn't
+        fun. 😁
+      </details>
     </main>
   )
 }
