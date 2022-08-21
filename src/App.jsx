@@ -2,27 +2,36 @@ import { useEffect, useState } from "react"
 import Cell from "./Components/Cell"
 
 function App() {
-  const emptyBoard = Array(9).fill("")
+  const emptyBoard = Array(9).fill()
   const [board, setBoard] = useState(emptyBoard)
   const [turn, setTurn] = useState("X")
+  const [winner, setWinner] = useState(null)
 
   function checkForWinner(turn) {
-    const firstRow = board[0] === board[1] && board[0] === board[2]
-    const secondRow = board[3] === board[4] && board[3] === board[5]
-    const thirdRow = board[6] === board[7] && board[6] === board[8]
-    const horizontalWin = [firstRow, secondRow, thirdRow].some((elem) => elem === true)
+    if (!board.some((el) => el === undefined)) {
+      setWinner("tie")
+      console.log("tie")
+    }
+    const firstRow = [board[0], board[1], board[2]].every((el) => el === turn)
+    const secondRow = [board[3], board[4], board[5]].every((el) => el === turn)
+    const thirdRow = [board[6], board[7], board[8]].every((el) => el === turn)
 
-    const firstCol = board[0] === board[3] && board[0] === board[6]
-    const secondCol = board[1] === board[4] && board[1] === board[7]
-    const thirdCol = board[2] === board[5] && board[2] === board[8]
-    const verticalWin = [firstCol, secondCol, thirdCol].some((elem) => elem === true)
+    const horizontalWin = [firstRow, secondRow, thirdRow].some((el) => el === true)
 
-    const firstCross = board[0] === board[4] && board[0] === board[8]
-    const secondCross = board[2] === board[4] && board[2] === board[6]
-    const diagonalWin = [firstCross, secondCross].some((elem) => elem === true)
+    const firstCol = [board[0], board[3], board[6]].every((el) => el === turn)
+    const secondCol = [board[1], board[4], board[7]].every((el) => el === turn)
+    const thirdCol = [board[2], board[5], board[8]].every((el) => el === turn)
 
-    if (diagonalWin || verticalWin || horizontalWin) {
-      console.log("Winner: " + turn)
+    const verticalWin = [firstCol, secondCol, thirdCol].some((el) => el === true)
+
+    const firstCross = [board[0], board[4], board[8]].every((el) => el === turn)
+    const secondCross = [board[2], board[4], board[6]].every((el) => el === turn)
+
+    const diagonalWin = [firstCross, secondCross].some((el) => el === true)
+
+    if (horizontalWin || verticalWin || diagonalWin) {
+      setWinner(turn)
+      console.log("winner", turn)
     }
   }
 
@@ -30,7 +39,7 @@ function App() {
     const targetCell = board[id]
 
     // return if target cell is not null (contains X / O)
-    if (targetCell) return
+    if (targetCell || winner) return
 
     setBoard((prevBoard) => {
       const newBoard = [...prevBoard]
