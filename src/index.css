@@ -14,6 +14,8 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   --color-pencil-gray: #5c6274;
+  --color-pencil-red: #a65a5a;
+  --color-pencil-blue: #5a5aa6;
 }
 
 .app {
@@ -29,12 +31,12 @@
   place-items: center;
   font-family: "Fredericka the Great", cursive;
   font-size: 3rem;
+  user-select: none;
 }
 
 .game-grid {
   display: grid;
   grid-template: 1fr / 1fr 1fr 1fr;
-  user-select: none;
   cursor: pointer;
 }
 
@@ -42,7 +44,6 @@
   --cell-size: min(20vw, 20vh);
   display: grid;
   place-items: center;
-  color: var(--color-pencil-gray);
   border: solid 2px var(--color-pencil-gray);
   width: var(--cell-size);
   height: var(--cell-size);
@@ -77,6 +78,7 @@
   min-height: 5rem;
   text-align: center;
 }
+
 .fun-fact > summary {
   cursor: pointer;
 }
