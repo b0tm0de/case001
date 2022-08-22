@@ -8,52 +8,49 @@
 }
 
 :root {
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
   --color-pencil-gray: #5c6274;
   --color-pencil-red: #a65a5a;
   --color-pencil-blue: #5a5aa6;
+  --app-padding-height: 4vh;
+  --game-grid-height: 67vh;
+  --info-container-height: 25vh;
 }
 
 .app {
+  font-family: "Fredericka the Great", cursive;
   background-image: url(./assets/checkered-notebook-paper.jpg);
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  height: 100vh;
-  width: 100vw;
-  padding: 5vw;
-  display: grid;
-  place-items: center;
-  font-family: "Fredericka the Great", cursive;
-  font-size: 3rem;
   user-select: none;
+  height: 100vh;
+  width: 100%;
+  padding: var(--app-padding-height) 4vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: clamp(2rem, 8vw, 3.5rem);
+  gap: 2rem;
 }
 
 .game-grid {
   display: grid;
-  grid-template: 1fr / 1fr 1fr 1fr;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  grid-template-rows: 33.3% 33.3% 33.3%;
   cursor: pointer;
+  width: 100%;
+  height: calc(100vh - var(--info-container-height) - (var(--app-padding-height) * 2));
+  overflow: hidden;
 }
 
 .cell {
-  --cell-size: min(20vw, 20vh);
   display: grid;
   place-items: center;
   border: solid 2px var(--color-pencil-gray);
-  width: var(--cell-size);
-  height: var(--cell-size);
-  font-size: var(--cell-size);
+  font-size: 19vh;
   font-family: "Square Peg", cursive;
   text-transform: uppercase;
-}
-
-.cell-sign {
-  transform: translateY(-10%);
 }
 
 .cell:nth-child(-1n + 3) {
@@ -73,14 +70,9 @@
 }
 
 .fun-fact {
-  font-size: 1rem;
+  font-size: clamp(1rem, 2vw, 2rem);
   font-family: "Comic Sans MS", cursive;
-  min-height: 5rem;
   text-align: center;
-}
-
-.fun-fact > summary {
-  cursor: pointer;
 }
 
 .restart-btn {
@@ -89,8 +81,8 @@
   display: grid;
   place-items: center;
   font-size: 1.2rem;
-  min-width: 12rem;
-  height: 5rem;
+  padding: 1rem 2rem;
+  height: 4rem;
   border-radius: 0.5em;
   cursor: pointer;
   background-color: hsla(225, 12%, 41%, 0.3);
@@ -106,4 +98,45 @@
 
 .restart-btn:active {
   transform: scale(0.85);
+}
+
+.info-container {
+  text-align: center;
+  height: var(--info-container-height);
+  display: grid;
+  place-content: center;
+  margin-bottom: 1rem;
+}
+
+.message {
+  margin-bottom: 1.5rem;
+}
+
+@media screen and (orientation: landscape) {
+  :root {
+    --game-grid-width: 70%;
+    --info-container-width: 30%;
+  }
+
+  .app {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .game-grid {
+    width: calc(100% - var(--info-container-width));
+    height: calc(100vh - (var(--app-padding-height) * 2));
+  }
+
+  .info-container {
+    width: calc(100% - var(--game-grid-width));
+  }
+
+  .cell {
+    font-size: 13vw;
+  }
+
+  .message {
+    margin-bottom: 5rem;
+  }
 }

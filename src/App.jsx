@@ -12,9 +12,8 @@ function App() {
   function handleClick(id) {
     const targetCell = board[id]
 
-    // if target cell is NOT undefined (contains X / O)
-    // or winner already declared, return
-    if (targetCell || winnerMessage) return
+    // if target cell is NOT undefined (contains X / O) or game over, return
+    if (targetCell || isGameOver) return
 
     setBoard((prevBoard) => {
       const newBoard = [...prevBoard]
@@ -52,19 +51,22 @@ function App() {
 
   return (
     <main className="app">
-      <span>{winnerMessage || `${turn}'s turn.`}</span>
       <div className="game-grid">{boardElements}</div>
-      {isGameOver ? (
-        <button onClick={restartGame} className="restart-btn">
-          PLAY AGAIN
-        </button>
-      ) : (
-        <details className="fun-fact">
-          <summary>Fun fact:</summary>
-          All games end in a draw unless one of the players plays wrong. Actually, this fact isn't
-          fun. 😁
-        </details>
-      )}
+      <div className="info-container">
+        <span className="message">{winnerMessage || `${turn}'s turn.`}</span>
+        {isGameOver ? (
+          <button onClick={restartGame} className="restart-btn">
+            Play Again
+          </button>
+        ) : (
+          <div className="fun-fact">
+            <p>
+              Fun fact: All Tic-Tac-Toe games end in a draw when played correctly. Actually; this
+              fact, isn't fun.😀
+            </p>
+          </div>
+        )}
+      </div>
     </main>
   )
 }
