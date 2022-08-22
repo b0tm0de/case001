@@ -1,43 +1,19 @@
 import { useEffect, useState } from "react"
 import Cell from "./Components/Cell"
+import checkForWinner from "./helpers/checkForWinner"
 
 function App() {
   const emptyBoard = Array(9).fill()
   const [board, setBoard] = useState(emptyBoard)
   const [turn, setTurn] = useState("X")
   const [winnerMessage, setWinnerMessage] = useState("")
-
-  function checkForWinner(turn) {
-    if (!board.some((el) => el === undefined)) {
-      setWinnerMessage("Tie")
-    }
-
-    const firstRow = [board[0], board[1], board[2]].every((el) => el === turn)
-    const secondRow = [board[3], board[4], board[5]].every((el) => el === turn)
-    const thirdRow = [board[6], board[7], board[8]].every((el) => el === turn)
-
-    const horizontalWin = [firstRow, secondRow, thirdRow].some((el) => el === true)
-
-    const firstCol = [board[0], board[3], board[6]].every((el) => el === turn)
-    const secondCol = [board[1], board[4], board[7]].every((el) => el === turn)
-    const thirdCol = [board[2], board[5], board[8]].every((el) => el === turn)
-
-    const verticalWin = [firstCol, secondCol, thirdCol].some((el) => el === true)
-
-    const firstCross = [board[0], board[4], board[8]].every((el) => el === turn)
-    const secondCross = [board[2], board[4], board[6]].every((el) => el === turn)
-
-    const diagonalWin = [firstCross, secondCross].some((el) => el === true)
-
-    if (horizontalWin || verticalWin || diagonalWin) {
-      setWinnerMessage(`${turn} won the game.`)
-    }
-  }
+  const [isGameOver, setIsGameOver] = useState(false)
 
   function handleClick(id) {
     const targetCell = board[id]
 
-    // return if target cell is not null (contains X / O)
+    // if target cell is NOT undefined (contains X / O)
+    // or winner already declared, return
     if (targetCell || winnerMessage) return
 
     setBoard((prevBoard) => {
@@ -50,25 +26,35 @@ function App() {
   function restartGame() {
     setBoard(emptyBoard)
     setWinnerMessage("")
+    // restarting game causes re-render, so useEffect() will set turn to "X" again
     setTurn("O")
+    setIsGameOver(false)
   }
 
   useEffect(() => {
     setTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"))
 
-    checkForWinner(turn)
+    checkForWinner(board, turn, setWinnerMessage, setIsGameOver)
   }, [board])
 
   const boardElements = board.map((sign, i) => {
-    return <Cell key={i} id={i} sign={sign} setBoard={setBoard} handleClick={handleClick} />
+    return (
+      <Cell
+        key={i}
+        id={i}
+        sign={sign}
+        setBoard={setBoard}
+        handleClick={handleClick}
+        isGameOver={isGameOver}
+      />
+    )
   })
 
   return (
     <main className="app">
       <span>{winnerMessage || `${turn}'s turn.`}</span>
       <div className="game-grid">{boardElements}</div>
-
-      {winnerMessage ? (
+      {isGameOver ? (
         <button onClick={restartGame} className="restart-btn">
           PLAY AGAIN
         </button>
