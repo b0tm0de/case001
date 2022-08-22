@@ -5,13 +5,13 @@ function App() {
   const emptyBoard = Array(9).fill()
   const [board, setBoard] = useState(emptyBoard)
   const [turn, setTurn] = useState("X")
-  const [winner, setWinner] = useState(null)
+  const [winnerMessage, setWinnerMessage] = useState("")
 
   function checkForWinner(turn) {
     if (!board.some((el) => el === undefined)) {
-      setWinner("tie")
-      console.log("tie")
+      setWinnerMessage("Tie")
     }
+
     const firstRow = [board[0], board[1], board[2]].every((el) => el === turn)
     const secondRow = [board[3], board[4], board[5]].every((el) => el === turn)
     const thirdRow = [board[6], board[7], board[8]].every((el) => el === turn)
@@ -30,8 +30,7 @@ function App() {
     const diagonalWin = [firstCross, secondCross].some((el) => el === true)
 
     if (horizontalWin || verticalWin || diagonalWin) {
-      setWinner(turn)
-      console.log("winner", turn)
+      setWinnerMessage(`${turn} won the game.`)
     }
   }
 
@@ -39,7 +38,7 @@ function App() {
     const targetCell = board[id]
 
     // return if target cell is not null (contains X / O)
-    if (targetCell || winner) return
+    if (targetCell || winnerMessage) return
 
     setBoard((prevBoard) => {
       const newBoard = [...prevBoard]
@@ -48,8 +47,15 @@ function App() {
     })
   }
 
+  function restartGame() {
+    setBoard(emptyBoard)
+    setWinnerMessage("")
+    setTurn("O")
+  }
+
   useEffect(() => {
     setTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"))
+
     checkForWinner(turn)
   }, [board])
 
@@ -59,14 +65,20 @@ function App() {
 
   return (
     <main className="app">
-      <span>{turn}'s turn.</span>
+      <span>{winnerMessage || `${turn}'s turn.`}</span>
       <div className="game-grid">{boardElements}</div>
 
-      <details className="fun-fact">
-        <summary>Fun fact:</summary>
-        All games end in a draw unless one of the players plays wrong. Actually, this fact isn't
-        fun. 😁
-      </details>
+      {winnerMessage ? (
+        <button onClick={restartGame} className="restart-btn">
+          PLAY AGAIN
+        </button>
+      ) : (
+        <details className="fun-fact">
+          <summary>Fun fact:</summary>
+          All games end in a draw unless one of the players plays wrong. Actually, this fact isn't
+          fun. 😁
+        </details>
+      )}
     </main>
   )
 }

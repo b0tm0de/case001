@@ -82,3 +82,28 @@
 .fun-fact > summary {
   cursor: pointer;
 }
+
+.restart-btn {
+  font-family: "Comic Sans MS", cursive;
+  font-weight: bold;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  min-width: 12rem;
+  height: 3rem;
+  border-radius: 0.5em;
+  cursor: pointer;
+  background-color: hsla(225, 12%, 41%, 0.3);
+  box-shadow: 0px 0px 10px 5px hsla(225, 12%, 41%, 0.3);
+  transition: 0.25s all ease-out;
+}
+
+.restart-btn:hover {
+  letter-spacing: 4px;
+  background-color: hsla(225, 12%, 41%, 0.5);
+  box-shadow: none;
+}
+
+.restart-btn:active {
+  transform: scale(0.85);
+}
