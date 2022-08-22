@@ -3,6 +3,7 @@ export default function checkForWinner(board, turn, setWinnerMessage, setIsGameO
   // and still there is no win condition, so it is a tie
   if (!board.some((el) => el === undefined)) {
     setWinnerMessage("Tie")
+    setIsGameOver(true)
   }
 
   const firstRow = [board[0], board[1], board[2]].every((el) => el === turn)
