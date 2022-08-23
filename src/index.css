@@ -12,8 +12,20 @@
   --color-pencil-red: #a65a5a;
   --color-pencil-blue: #5a5aa6;
   --app-padding-height: 4vh;
-  --game-grid-height: 67vh;
-  --info-container-height: 25vh;
+  --game-grid-height: 66vh;
+  --info-container-height: 26vh;
+}
+
+html {
+  /* fixes weird flickering effect on mobile chrome */
+  -webkit-tap-highlight-color: transparent;
+
+  -webkit-user-select: none;
+  -khtml-webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  outline: none;
 }
 
 .app {
@@ -23,7 +35,6 @@
   background-attachment: fixed;
   background-position: center;
   background-size: cover;
-  user-select: none;
   height: 100vh;
   width: 100%;
   padding: var(--app-padding-height) 4vw;
@@ -105,11 +116,11 @@
   height: var(--info-container-height);
   display: grid;
   place-content: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem;
 }
 
 .message {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 @media screen and (orientation: landscape) {
