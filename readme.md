@@ -4,7 +4,8 @@
 
 ---
 
-TODO: add screenshot here
+[TicTacToe Screenshot](https://user-images.githubusercontent.com/6636688/186130382-c10db88f-3f3c-4f8c-be92-71d39f62ce97.jpg)
+
 
 ---
 
