@@ -12,12 +12,9 @@
 
 Live demo here: [TicTacToe](https://react-simple-tictactoe.netlify.app/)
 
-
 ## Description
 
 Tic Tac Toe, written in React, used grid, flex(box) and CSS media query. Skeleton created via [Vite](https://vitejs.dev/)
-
-TODO: add live demo link here.
 
 ## ⌨ Installation
 
