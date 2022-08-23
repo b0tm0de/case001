@@ -10,7 +10,7 @@
 
 ## Live Demo
 
-Live demo here: [TicTacToe](https://react-simple-tictactoe.netlify.app/)
+Live demo here: :arrow_right: [TicTacToe](https://react-simple-tictactoe.netlify.app/)
 
 ## Description
 
