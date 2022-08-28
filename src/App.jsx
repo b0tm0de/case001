@@ -8,6 +8,7 @@ function App() {
   const [turn, setTurn] = useState("X")
   const [winnerMessage, setWinnerMessage] = useState("")
   const [isGameOver, setIsGameOver] = useState(false)
+  const [firstRender, setFirstRender] = useState(true)
 
   function handleClick(id) {
     const targetCell = board[id]
@@ -25,14 +26,16 @@ function App() {
   function restartGame() {
     setBoard(emptyBoard)
     setWinnerMessage("")
-    // restarting game causes re-render, so useEffect() will set turn to "X" again
-    setTurn("O")
+    setTurn("X")
     setIsGameOver(false)
+    setFirstRender(true)
   }
 
   useEffect(() => {
-    setTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"))
-
+    if (!firstRender) {
+      setTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"))
+    }
+    setFirstRender(false)
     checkForWinner(board, turn, setWinnerMessage, setIsGameOver)
   }, [board])
 

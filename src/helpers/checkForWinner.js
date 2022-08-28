@@ -1,11 +1,4 @@
 export default function checkForWinner(board, turn, setWinnerMessage, setIsGameOver) {
-  // if there is no undefined cell, means all cells filled
-  // and still there is no win condition, so it is a tie
-  if (!board.some((el) => el === undefined)) {
-    setWinnerMessage("Tie")
-    setIsGameOver(true)
-  }
-
   const firstRow = [board[0], board[1], board[2]].every((el) => el === turn)
   const secondRow = [board[3], board[4], board[5]].every((el) => el === turn)
   const thirdRow = [board[6], board[7], board[8]].every((el) => el === turn)
@@ -26,5 +19,14 @@ export default function checkForWinner(board, turn, setWinnerMessage, setIsGameO
   if (horizontalWin || verticalWin || diagonalWin) {
     setWinnerMessage(`${turn} won the game.`)
     setIsGameOver(true)
+    return
+  }
+
+  // if there is no undefined cell, means all cells filled
+  // and still there is no win condition, so it is a tie
+  if (!board.some((el) => el === undefined)) {
+    setWinnerMessage("Tie")
+    setIsGameOver(true)
+    return
   }
 }
