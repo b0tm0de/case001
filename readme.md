@@ -20,7 +20,7 @@ Tic Tac Toe, written in React, used grid, flex(box) and CSS media query. Skeleto
 
 | Command                                            | Action                                       |
 | :------------------------------------------------- | :------------------------------------------- |
-| `git clone https://github.com/b0tm0de/case001.git` | Clone the repo                               |
+| `git clone https://github.com/ozhasta/case001.git` | Clone the repo                               |
 | `cd case001`                                       | Change directory to root of project          |
 | `npm install`                                      | Install dependencies                         |
 | `npm run dev`                                      | Start local development server               |
