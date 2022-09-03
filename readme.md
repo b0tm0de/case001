@@ -18,11 +18,11 @@ Tic Tac Toe, written in React, used grid, flex(box) and CSS media query. Skeleto
 
 ## ⌨ Installation
 
-| Command                                            | Action                                       |
-| :------------------------------------------------- | :------------------------------------------- |
-| `git clone https://github.com/ozhasta/case001.git` | Clone the repo                               |
-| `cd case001`                                       | Change directory to root of project          |
-| `npm install`                                      | Install dependencies                         |
-| `npm run dev`                                      | Start local development server               |
-| `npm run build`                                    | Build your production site to `./dist/`      |
-| `npm run preview`                                  | Preview your build locally, before deploying |
+| Command                                                      | Action                                       |
+| :----------------------------------------------------------- | :------------------------------------------- |
+| `git clone https://github.com/ozhasta/react-tic-tac-toe.git` | Clone the repo                               |
+| `cd case001`                                                 | Change directory to root of project          |
+| `npm install`                                                | Install dependencies                         |
+| `npm run dev`                                                | Start local development server               |
+| `npm run build`                                              | Build your production site to `./dist/`      |
+| `npm run preview`                                            | Preview your build locally, before deploying |
