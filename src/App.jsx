@@ -54,7 +54,7 @@ function App() {
 
   return (
     <main className="app">
-      <div className="game-grid">{boardElements}</div>
+      <div className="board">{boardElements}</div>
       <div className="info-container">
         <span className="message">{winnerMessage || `${turn}'s turn.`}</span>
         {isGameOver ? (
