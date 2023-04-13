@@ -79,7 +79,7 @@ body {
   height: 40dvh;
 }
 
-.-game-status {
+.game-status {
   font-size: clamp(2.2rem, 7vw + 1rem, 3.7rem);
 }
 
