@@ -1,20 +1,25 @@
-import handPenCursor from "../assets/pencil-cursor.cur"
+import pencilCursor from "../assets/pencil-cursor.cur"
 
 export default function Cell({ id, sign, handleClick, isGameOver }) {
-  function disabledCellsStyle(gameOver) {
+  function getCellStyle(gameOver) {
+    const X_COLOR = "var(--color-pencil-blue)"
+    const O_COLOR = "var(--color-pencil-red)"
+    const PENCIL_CURSOR = `url(${pencilCursor}) 0 0, auto`
+
     // App > handleClick() preventing clicks if necessary, here only for visuals
-    return gameOver
+    const style = gameOver
       ? {
           cursor: "not-allowed",
-          color: sign === "X" ? "var(--color-pencil-blue)" : "var(--color-pencil-red)",
+          color: sign === "X" ? X_COLOR : O_COLOR,
         }
       : {
-          cursor: sign ? "not-allowed" : `url(${handPenCursor}) 0 0, auto`,
-          color: sign === "X" ? "var(--color-pencil-blue)" : "var(--color-pencil-red)",
+          cursor: sign ? "not-allowed" : PENCIL_CURSOR,
+          color: sign === "X" ? X_COLOR : O_COLOR,
         }
+    return style
   }
 
-  const style = disabledCellsStyle(isGameOver)
+  const style = getCellStyle(isGameOver)
 
   return (
     <div onClick={() => handleClick(id)} className="cell" style={style}>

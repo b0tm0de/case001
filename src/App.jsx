@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import Cell from "./Components/Cell"
 import checkForWinner from "./helpers/checkForWinner"
 
@@ -8,7 +8,7 @@ function App() {
   const [turn, setTurn] = useState("X")
   const [winnerMessage, setWinnerMessage] = useState("")
   const [isGameOver, setIsGameOver] = useState(false)
-  const [firstRender, setFirstRender] = useState(true)
+  const initialRender = useRef(true)
 
   function handleClick(id) {
     const targetCell = board[id]
@@ -28,15 +28,15 @@ function App() {
     setWinnerMessage("")
     setTurn("X")
     setIsGameOver(false)
-    setFirstRender(true)
   }
-
+  // FIXME: burada hala bir şeyler ters gidiyor
   useEffect(() => {
-    if (!firstRender) {
+    if (!initialRender.current) {
       setTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"))
+      checkForWinner(board, turn, setWinnerMessage, setIsGameOver)
+    } else {
+      initialRender.current = false
     }
-    setFirstRender(false)
-    checkForWinner(board, turn, setWinnerMessage, setIsGameOver)
   }, [board])
 
   const boardElements = board.map((sign, i) => {
@@ -56,17 +56,17 @@ function App() {
     <main className="app">
       <div className="board">{boardElements}</div>
       <div className="info-container">
-        <span className="message">{winnerMessage || `${turn}'s turn.`}</span>
+        <span className="game-status">{winnerMessage || `${turn}'s turn.`}</span>
         {isGameOver ? (
           <button onClick={restartGame} className="restart-btn">
             Play Again
           </button>
         ) : (
           <div className="fun-fact">
-            <p>
-              Fun fact: All Tic-Tac-Toe games end in a draw when played correctly. Actually; this
-              fact, isn't fun.😀
-            </p>
+            <p>Fun fact:</p>
+            <p>All Tic-Tac-Toe games end in a draw when played correctly.</p>
+            <p>Actually, this fact isn't fun.</p>
+            <p className="old-school-smiley">:)</p>
           </div>
         )}
       </div>
