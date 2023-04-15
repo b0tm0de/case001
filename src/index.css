@@ -11,7 +11,7 @@
   --color-pencil-gray: hsl(225, 12%, 41%);
   --color-pencil-red: hsl(0, 30%, 50%);
   --color-pencil-blue: hsl(240, 30%, 50%);
-  --border-cell-transparent: 2px solid transparent;
+  --border-cell-transparent: 3px solid transparent;
 }
 
 html {
@@ -22,7 +22,7 @@ html {
   user-select: none;
   outline: none;
 
-  /* fixes weird flickering effect on mobile chrome */
+  /* Fixes weird flickering effect on mobile chrome. */
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -32,28 +32,28 @@ body {
 }
 
 body {
+  overflow: hidden;
   background: url(assets/checkered-notebook-paper.jpg) center/cover no-repeat fixed;
 }
 
 .app {
   font-family: "Fredericka the Great", cursive;
   height: 100dvh;
-  max-width: 1000px;
-  overflow: hidden;
+  max-width: 1020px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 3vw;
+  justify-content: space-around;
+  padding: 3dvmin;
   margin: auto;
-  gap: 2vw;
+  gap: 2dvmin;
 }
 
 .board {
-  --cell-size: min(30dvmin, 17dvmax);
+  --cell-size: min(30dvmin, 17dvmax, 200px);
   display: grid;
   grid-template: repeat(3, var(--cell-size)) / repeat(3, var(--cell-size));
-  height: 56dvh;
+  height: 55dvh;
   place-content: center;
 }
 
@@ -63,9 +63,9 @@ body {
   border: 3px solid var(--color-pencil-gray);
   font-family: "Square Peg", cursive;
   text-transform: uppercase;
-  font-size: clamp(2rem, 17vw + 1rem, 6.5rem);
+  font-size: clamp(2rem, 19dvmin + 1rem, 7rem);
   line-height: 1;
-  padding-top: 1rem;
+  padding-top: 14%;
   overflow: hidden;
   cursor: pointer;
 }
@@ -75,32 +75,36 @@ body {
   flex-direction: column;
   justify-content: space-evenly;
   padding: 1rem;
-  text-align: center;
-  height: 40dvh;
+  align-items: center;
+  height: 45dvh;
 }
 
 .game-status {
-  font-size: clamp(2.2rem, 7vw + 1rem, 3.7rem);
+  font-size: clamp(2.2rem, 6dvmin + 1rem, 3.6rem);
 }
 
 .fun-fact {
   display: grid;
-  place-content: center;
-  font-size: clamp(0.82rem, 0.14vw + 1rem, 1.25rem);
+  place-items: center;
+  font-size: 1rem;
   font-family: "Comic Sans MS", cursive;
   background: hsl(60, 100%, 90%);
   box-shadow: 5px 5px 7px hsla(0, 0%, 13%, 0.7);
-  rotate: -5deg;
-  width: 27ch;
+  rotate: -6deg;
+  width: 26ch;
+  padding: 1em;
 }
 
 .fun-fact p {
-  margin: 0.6rem 1.2rem;
+  margin: 0.5em 0;
 }
 
-.old-school-smiley {
+p.old-school-smiley {
   rotate: 90deg;
-  font-size: 2.2rem;
+  font-size: 2rem;
+  margin: 0;
+  font-family: monospace;
+  letter-spacing: -3px;
 }
 
 @media (orientation: landscape) {
@@ -109,15 +113,12 @@ body {
   }
 
   .board {
-    --cell-size: 24dvmin;
-    grid-template: repeat(3, var(--cell-size)) / repeat(3, var(--cell-size));
     height: 100%;
-    flex-grow: 1;
   }
 
   .info-container {
-    margin: auto;
     height: 100%;
+    min-width: 35%;
   }
 }
 
@@ -148,7 +149,6 @@ body {
   place-content: center;
   font-size: 1.2rem;
   padding: 1rem 2rem;
-  height: 4rem;
   border-radius: 0.5em;
   cursor: pointer;
   background-color: hsla(225, 12%, 41%, 0.3);

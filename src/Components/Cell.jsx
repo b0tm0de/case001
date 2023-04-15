@@ -6,15 +6,15 @@ export default function Cell({ id, sign, handleClick, isGameOver }) {
     const O_COLOR = "var(--color-pencil-red)"
     const PENCIL_CURSOR = `url(${pencilCursor}) 0 0, auto`
 
-    // App > handleClick() preventing clicks if necessary, here only for visuals
+    // App > handleClick() prevents clicks if needed, here is mostly for visuals.
     const style = gameOver
       ? {
-          cursor: "not-allowed",
           color: sign === "X" ? X_COLOR : O_COLOR,
+          pointerEvents: "none",
         }
       : {
-          cursor: sign ? "not-allowed" : PENCIL_CURSOR,
           color: sign === "X" ? X_COLOR : O_COLOR,
+          cursor: sign ? "not-allowed" : PENCIL_CURSOR,
         }
     return style
   }

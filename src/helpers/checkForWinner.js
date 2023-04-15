@@ -21,8 +21,8 @@ export default function checkForWinner(board, turn, setWinnerMessage, setIsGameO
     return
   }
 
-  // if there is no undefined cell, means all cells filled
-  // and still there is no win condition, so it is a tie
+  // If there is no undefined cell, means all cells filled
+  // and still there is no win condition, so it is a tie.
   if (!board.includes(undefined)) {
     setWinnerMessage("Tie!")
     setIsGameOver(true)
