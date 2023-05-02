@@ -1,10 +1,10 @@
 # Simple Tic Tac Toe Game
 
-> Play Tic Tac Toe by yourself :)
+> Play Tic Tac Toe
 
 ---
 
-![TicTacToe Screenshot](https://user-images.githubusercontent.com/6636688/186130382-c10db88f-3f3c-4f8c-be92-71d39f62ce97.jpg)
+![TicTacToe Screenshot](screenshot.jpg)
 
 ---
 
