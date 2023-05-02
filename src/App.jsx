@@ -8,12 +8,12 @@ function App() {
   const [turn, setTurn] = useState("X")
   const [winnerMessage, setWinnerMessage] = useState("")
   const [isGameOver, setIsGameOver] = useState(false)
-  const initialRender = useRef(true)
+  const newGame = useRef(true)
 
   function handleClick(id) {
     const targetCell = board[id]
 
-    // if target cell is NOT undefined (contains X / O) or game over, return
+    // If target cell contains X / O or if game over, return.
     if (targetCell || isGameOver) return
 
     setBoard((prevBoard) => {
@@ -26,16 +26,18 @@ function App() {
   function restartGame() {
     setBoard(emptyBoard)
     setWinnerMessage("")
-    setTurn("X")
     setIsGameOver(false)
+    newGame.current = true
   }
-  // FIXME: burada hala bir şeyler ters gidiyor
+
   useEffect(() => {
-    if (!initialRender.current) {
-      setTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"))
+    // If "StrictMode" enabled in development mode, "useEffect" runs
+    // twice during the first render and causes unnecessary player
+    // turn changes. In prod. mode, this is working as intended.
+    if (newGame.current) newGame.current = false
+    else {
       checkForWinner(board, turn, setWinnerMessage, setIsGameOver)
-    } else {
-      initialRender.current = false
+      setTurn((prevTurn) => (prevTurn === "X" ? "O" : "X"))
     }
   }, [board])
 
@@ -64,7 +66,10 @@ function App() {
         ) : (
           <div className="fun-fact">
             <p>Fun fact:</p>
-            <p>All Tic-Tac-Toe games end in a draw when played correctly.</p>
+            <p>
+              All Tic-Tac-Toe games end in
+              <br />a draw when played correctly.
+            </p>
             <p>Actually, this fact isn't fun.</p>
             <p className="old-school-smiley">:)</p>
           </div>
